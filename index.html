@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orrery Intro</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/x-icon" href="./assets/title.png">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow-y: auto;
+        }
+        </style>
+</head>
+<body>
+    <div class="intro-container">
+        <div class="welcome-image">
+            <h1>Welcome to the Orrery Web App</h1>
+            <p>Explore the wonders of the universe!</p>
+            <button id="start-button">Start</button>
+        </div>
+
+        <div class="image-boxes">
+    <div class="box" data-long-fact="The mighty blue giant AG Carinae is one of the brightest stars in our Milky Way galaxy. It shines with the brilliance of 1 million suns. The Hubble Space Telescope snapped an image of this particularly large outburst.">
+        <img src="./assets/1.png" alt="AG Carinae">
+        <div class="fact-text">AG Carinae</div>
+    </div>
+    <div class="box" data-long-fact="A brilliant tapestry of young stars flaring to life resembles a glittering fireworks display in this Hubble Space Telescope image. This is a giant cluster of about 3,000 stars called Westerlund 2.">
+        <img src="./assets/2.png" alt="Westerlund 2">
+        <div class="fact-text">Hubble Spots Fireworks in Westerlund 2</div>
+    </div>
+    <div class="box" data-long-fact="Astronomers combined several Hubble Space Telescope images to create this view of the Pillars of Creation, which are about 5 light-years tall.">
+        <img src="./assets/3.png" alt="Pillars of Creation">
+        <div class="fact-text">Hubble Studies the Pillars of Creation</div>
+    </div>
+    <div class="box" data-long-fact="NASA's Stratospheric Observatory for Infrared Astronomy (SOFIA) detected the magnetic field streamlines shown over this image of the Keyhole Nebula.">
+        <img src="./assets/4.png" alt="Keyhole Nebula">
+        <div class="fact-text">Keyhole Nebula</div>
+    </div>
+</div>
+<div class="scrolling-facts">
+            <img src="./assets/fact.png" alt="Facts Background" class="fact-background">
+            <p id="scroll-fact">Space Fact: The universe is about 13.8 billion years old!</p>
+        </div>
+    </div>
+
+    </div>
+
+    <script>
+        document.getElementById('start-button').addEventListener('click', function() {
+            window.location.href = 'main.html'; 
+        });
+
+        const boxes = document.querySelectorAll('.box');
+
+boxes.forEach(box => {
+    const shortFact = box.querySelector('.fact-text').innerText;
+
+    box.addEventListener('mouseenter', () => {
+        box.querySelector('.fact-text').innerText = shortFact; 
+        box.querySelector('.fact-text').style.opacity = 1; 
+    });
+
+    box.addEventListener('mouseleave', () => {
+        box.querySelector('.fact-text').innerText = shortFact;
+        box.querySelector('.fact-text').style.opacity = 0;
+    });
+
+    box.addEventListener('click', () => {
+        const longFact = box.getAttribute('data-long-fact');
+        box.querySelector('.fact-text').innerText = longFact;
+        box.querySelector('.fact-text').style.opacity = 1;
+    });
+});
+
+        const facts = [
+            "Space Fact: Neutron stars are incredibly dense.",
+            "Space Fact: There are more stars in the universe than grains of sand on Earth.",
+            "Space Fact: A year on Mercury is just 88 Earth days.",
+            "Space Fact: Saturn's rings are made of ice and rock.",
+            "Space Fact: The footprints on the Moon will last for millions of years."
+        ];
+
+        let currentFactIndex = 0;
+        setInterval(() => {
+            currentFactIndex = (currentFactIndex + 1) % facts.length;
+            document.getElementById('scroll-fact').innerText = facts[currentFactIndex];
+        }, 5000);
+    </script>
+</body>
+</html>
